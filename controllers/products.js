@@ -11,8 +11,9 @@ exports.getAddProduct = (req, res, next)=> {
         path.join(pagesDir, 'add-product'), { pageTitle: 'Add Product page'});
 }
 exports.getShoppingList = (req, res, next) => {
-    const products = Product.fetchAll();
-    res.render(path.join(pagesDir, 'product-list'), {pageTitle: 'My Shopping list', productList: products});
+    Product.fetchAll((products => {
+        res.render(path.join(pagesDir, 'product-list'), {pageTitle: 'My Shopping list', productList: products});
+    }));
 }
 exports.postAddProduct = (req, res, next) => {
     const products = new Product(req.body);
