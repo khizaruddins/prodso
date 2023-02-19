@@ -1,0 +1,21 @@
+extends ../layouts/layouts
+block content 
+    .container.mt-4 
+        h1 My Product List page
+        if productList.length > 0
+            table.table
+                thead
+                    tr
+                    th(scope='col') Sr No.
+                    th(scope='col') Product Name
+                    th(scope='col') Price
+                    th(scope='col') Availability
+                tbody
+                    each val, index in productList
+                        tr
+                            th(scope='row') #{index + 1}
+                                td #{val.product_name}
+                                td #{val.product_cost}
+                                td #{val.product_availability === 'on' ? 'available': 'unavailable'}
+        else  
+            h1 No Products added
