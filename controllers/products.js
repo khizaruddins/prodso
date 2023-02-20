@@ -16,13 +16,20 @@ exports.getShoppingList = (req, res, next) => {
     }));
 }
 exports.postAddProduct = (req, res, next) => {
-    const products = new Product(req.body);
+    const products = new Product({id: Math.random().toString(), ...req.body});
     products.save();
-    res.status(302).redirect('/admin/products');
+    res.redirect('/admin/products');
 }
 exports.getHomePage = (req, res, next)=> {
     res.render(path.join(pagesDir, 'home'), {pageTitle: 'Home page' });
 }
 exports.getShopPage = (req, res, next)=> {
     res.render(path.join(pagesDir, 'shop'), {pageTitle: 'My Shop' });
+}
+
+exports.getProductDetailsPage = (req ,res, next) => {
+    const productId = +req.params.productId;
+    Product.findById(productId, product => {
+        res.render(path.join(pagesDir, 'product-details'), {pageTitle: 'Product Details', product});
+    });
 }

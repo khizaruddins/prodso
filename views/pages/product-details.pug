@@ -1,0 +1,11 @@
+extends ../layouts/layouts
+
+block content 
+    .container.p-3
+        h1.my-3 Product Details page
+        .card.my-4(style='width: 20rem;')
+            .card-body
+                h2.card-title #{product.product_name}
+                p.card-text
+                | Price: $ #{product.product_cost}
+                | Availability: #{product.product_availability === 'on' ? 'Available': 'Not available'}

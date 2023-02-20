@@ -15,6 +15,7 @@ const getProductFromFile = cb => {
 
 module.exports = class Product {
     constructor(product) {
+        this.id = product.id;
         this.product_name = product.product_name;
         this.product_cost = product.product_cost;
         this.product_availability = product.product_availability;
@@ -30,5 +31,12 @@ module.exports = class Product {
     }
     static fetchAll(cb) {
         getProductFromFile(cb);
+    }
+
+    static findById(id, cb) {
+        getProductFromFile(products => {
+            const product = products.find(item => item.id === id);
+            cb(product);
+        });
     }
 }

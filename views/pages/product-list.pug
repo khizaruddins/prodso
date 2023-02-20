@@ -14,7 +14,8 @@ block content
                     each val, index in productList
                         tr
                             th(scope='row') #{index + 1}
-                                td #{val.product_name}
+                                td 
+                                    a(href="/admin/products/" + val.id) #{val.product_name}
                                 td #{val.product_cost}
                                 td #{val.product_availability === 'on' ? 'available': 'unavailable'}
         else  
