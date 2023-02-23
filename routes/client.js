@@ -6,4 +6,10 @@ router.get('/', productsController.getHomePage);
 
 router.get('/shop',productsController.getShopPage);
 
+router.get('/cart', productsController.getCart);
+
+router.post('/cart', productsController.postCart);
+
+router.get('/order', productsController.getOrderPage);
+
 module.exports = router;

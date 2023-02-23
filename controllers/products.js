@@ -26,6 +26,17 @@ exports.getHomePage = (req, res, next)=> {
 exports.getShopPage = (req, res, next)=> {
     res.render(path.join(pagesDir, 'shop'), {pageTitle: 'My Shop' });
 }
+exports.getCart = (req, res, next) => {
+    res.render(path.join(pagesDir, 'cart'), {pageTitle: 'Your Cart'});
+}
+exports.postCart = (req, res, next) => {
+    const prodId = req.body.productId;
+    console.log(prodId);
+    res.redirect('/order');
+}
+exports.getOrderPage = (req, res, next) => {
+    res.render(path.join(pagesDir, 'order'), {pageTitle: 'My Orders'});
+}
 
 exports.getProductDetailsPage = (req ,res, next) => {
     const productId = +req.params.productId;
