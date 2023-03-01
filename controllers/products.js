@@ -4,11 +4,21 @@ const path  = require('path');
 const pagesDir = path.join(__dirname, '..', 'views', 'pages');
 
 const Product = require('../models/product');
+const Cart = require('../models/cart');
 
 // controller functions and binding view with data
 exports.getAddProduct = (req, res, next)=> {
     res.render(
-        path.join(pagesDir, 'add-product'), { pageTitle: 'Add Product page'});
+        path.join(pagesDir, 'edit-product'), { pageTitle: 'Add Product page'});
+}
+
+exports.getEditProduct = (req, res, next)=> {
+    const prodId = +req.params.productId;
+
+    Product.findById(prodId, product => {
+        res.render(
+            path.join(pagesDir, 'edit-product'), { pageTitle: 'Edit Product page', product});
+    })
 }
 exports.getShoppingList = (req, res, next) => {
     Product.fetchAll((products => {
@@ -31,8 +41,10 @@ exports.getCart = (req, res, next) => {
 }
 exports.postCart = (req, res, next) => {
     const prodId = req.body.productId;
-    console.log(prodId);
-    res.redirect('/order');
+    Product.findById(prodId, (product) => {
+        Cart.addProduct(+prodId, +product.product_cost);
+    })
+    res.redirect('/cart');
 }
 exports.getOrderPage = (req, res, next) => {
     res.render(path.join(pagesDir, 'order'), {pageTitle: 'My Orders'});

@@ -10,6 +10,7 @@ block content
                     th(scope='col') Product Name
                     th(scope='col') Price
                     th(scope='col') Availability
+                    th(scope="col") Acitons
                 tbody
                     each val, index in productList
                         tr
@@ -18,5 +19,7 @@ block content
                                     a(href="/admin/products/" + val.id) #{val.product_name}
                                 td #{val.product_cost}
                                 td #{val.product_availability === 'on' ? 'available': 'unavailable'}
+                                td 
+                                    a(href="/admin/edit-product/" + val.id) Edit
         else  
             h1 No Products added
