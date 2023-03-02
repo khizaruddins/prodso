@@ -8,6 +8,8 @@ router.get('/add-product',productsController.getAddProduct);
 
 router.get('/edit-product/:productId',productsController.getEditProduct);
 
+router.post('/edit-product',productsController.postEditProduct);
+
 router.get('/products', productsController.getShoppingList);
 
 router.get('/products/:productId', productsController.getProductDetailsPage);

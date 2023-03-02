@@ -1,15 +1,17 @@
 extends ../layouts/layouts
 
 block content
-    form.container.mt-4(action="/admin/products", method="POST")
+    form.container.mt-4(action=(product ? "/admin/edit-product": "/admin/products"), method="POST")
       .mb-3
         label.form-label(for='addProduct') Product Name
         input#addProduct.form-control(type='text', aria-describedby='productName', name="product_name", placeholder="Product name", value=(product &&product.product_name || ''))
         #emailHelp.form-text Add your Product name here
       .mb-3
         label.form-label(for='productCost') Product Cost
-        input#productCost.form-control(type='number', name="product_cost", placeholder="Amount in rupees"  value=(product && product.product_cost || ''))
+        input#productCost.form-control(type='number', name="product_cost", placeholder="Amount in rupees",  value=(product && product.product_cost || ''))
       .mb-3.form-check
-        input#isAvailable.form-check-input(type='checkbox', name="product_availability"  checked=(product && product.product_availability === 'on' ? true : false))
+        input#isAvailable.form-check-input(type='checkbox', name="product_availability", checked=(product && product.product_availability === 'on' ? true : false))
         label.form-check-label(for='isAvailable') Is Available in stock
-      button.btn.btn-outline-primary(type='submit') Add Product
+        if product 
+          input(type="hidden", value=product.id, name="productId")
+      button.btn.btn-outline-primary(type='submit') #{product ? 'Edit': 'Add'} Product

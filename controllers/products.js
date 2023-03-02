@@ -20,13 +20,27 @@ exports.getEditProduct = (req, res, next)=> {
             path.join(pagesDir, 'edit-product'), { pageTitle: 'Edit Product page', product});
     })
 }
+exports.postEditProduct = (req, res, next) => {
+    const prodId = +req.body.productId;
+    const updatedTitle = req.body.product_name;
+    const updatedCost = req.body.product_cost;
+    const updatedAvailability = req.body.product_availability;
+    const updatedProduct = new Product({
+        id: prodId, 
+        product_name: updatedTitle,
+        product_cost: updatedCost,
+        product_availability: updatedAvailability
+    });
+    updatedProduct.save();
+    res.redirect('/admin/products');
+}
 exports.getShoppingList = (req, res, next) => {
     Product.fetchAll((products => {
         res.render(path.join(pagesDir, 'product-list'), {pageTitle: 'My Shopping list', productList: products});
     }));
 }
 exports.postAddProduct = (req, res, next) => {
-    const products = new Product({id: Math.random().toString(), ...req.body});
+    const products = new Product({id: null, ...req.body});
     products.save();
     res.redirect('/admin/products');
 }

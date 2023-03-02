@@ -23,10 +23,20 @@ module.exports = class Product {
 
     save() {
         getProductFromFile(products => {
-            products.push(this);
-            fs.writeFile(p, JSON.stringify(products), err => {
-                console.error(err)
-            });
+            if (this.id) {
+                const existingProductIndex = products.findIndex(prod => prod.id === this.id);
+                const updatedProducts = [...products];
+                updatedProducts[existingProductIndex] = this;
+                fs.writeFile(p, JSON.stringify(updatedProducts), err => {
+                    console.error(err)
+                });
+            } else {
+                this.id = Math.round(Math.random() * 100);
+                products.push(this);
+                fs.writeFile(p, JSON.stringify(products), err => {
+                    console.error(err)
+                });
+            }
         });
     }
     static fetchAll(cb) {
