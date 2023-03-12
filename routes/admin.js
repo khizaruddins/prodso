@@ -10,10 +10,14 @@ router.get('/edit-product/:productId',productsController.getEditProduct);
 
 router.post('/edit-product',productsController.postEditProduct);
 
+router.post('/delete-product',productsController.postDeleteProduct);
+
 router.get('/products', productsController.getShoppingList);
 
 router.get('/products/:productId', productsController.getProductDetailsPage);
 
 router.post('/products', productsController.postAddProduct);
+
+router.get('/cart', productsController.getCart);
 
 module.exports = router;

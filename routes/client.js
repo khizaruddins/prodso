@@ -12,4 +12,6 @@ router.post('/cart', productsController.postCart);
 
 router.get('/order', productsController.getOrderPage);
 
+router.post('/cart-delete-item', productsController.postDeleteCartItem);
+
 module.exports = router;

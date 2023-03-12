@@ -15,3 +15,7 @@ block content
         if product 
           input(type="hidden", value=product.id, name="productId")
       button.btn.btn-outline-primary(type='submit') #{product ? 'Edit': 'Add'} Product
+        if product
+          form(action="/admin/delete-product", method="post") 
+            input(type="hidden", name="productId" value=product.id)
+            button.btn.btn-outline-primary(type='submit' ) Delete Product
