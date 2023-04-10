@@ -13,6 +13,7 @@
   "author": "syed khizaruddin",
   "license": "ISC",
   "devDependencies": {
+    "mysql2": "^3.2.0",
     "nodemon": "^2.0.20"
   },
   "dependencies": {
